@@ -75,7 +75,7 @@ const showDetailsButton = (phoneId) => {
 
 //display phone details by slug
 const displayPhoneDetails = (phone) => {
-
+    console.log(phone)
     detailsSection.innerHTML = '';
 
     //displays phone image, name and releasedate
@@ -87,7 +87,7 @@ const displayPhoneDetails = (phone) => {
         <p id="release-date" class="font-montserrat mb:0 md:my-3">${phone.releaseDate}</p>
     `;
 
-    if (phone.releaseDate.length == 0) {
+    if (phone.releaseDate == null) {
         const releaseDateField = document.getElementById("release-date");
         releaseDateField.innerText = "No release date";
     }
