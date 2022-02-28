@@ -36,20 +36,25 @@ const displayPhones = (phones) => {
     displaySection.innerHTML = '';
     detailsSection.innerHTML = '';
 
+    const notFoundDiv = document.getElementById("not-found-div");
+
     //show if no results found
     if (phones.length == 0) {
-        const div = document.createElement("div");
-        div.innerHTML = `
+
+        notFoundDiv.innerHTML = `
         <h4 class="text-2xl text-cyan-700 font-bold text-center mt-5">Found no results for search</h4>
         `;
-        searchSection.appendChild(div);
+        searchSection.appendChild(notFoundDiv);
     }
     else {
         for (const phone of phones) {
+
+            notFoundDiv.innerHTML = '';
+
             const gridDiv = document.createElement("div");
             gridDiv.className = "border-2 border-cyan-700 rounded-md text-center flex flex-col justify-center items-center py-3";
             gridDiv.innerHTML = `
-            <img class=" h-2/3" src="${phone.image}" alt="">
+            <img class="h-2/3" src="${phone.image}" alt="">
                 <h1 class="uppercase mt-3 text-xl">${phone.brand}</h1>
                 <p class="my-3">${phone.phone_name}</p>
                 <button onclick="showDetailsButton('${phone.slug}')" class="bg-cyan-700 text-white py-2 px-3 lg:px-5 font-semibold rounded-md">Show Details</button>
@@ -75,11 +80,11 @@ const displayPhoneDetails = (phone) => {
 
     //displays phone image, name and releasedate
     const leftDiv = document.createElement("div");
-    leftDiv.className = "text-center flex flex-col justify-center items-center p-5"
+    leftDiv.className = "text-center flex flex-col justify-center items-center md:p-5 md:col-span-2 lg:col-span-1"
     leftDiv.innerHTML = `
     <img class="h-3/6" src="${phone.image}" alt="">
             <h1 class="uppercase mt-3 text-xl font-bold">${phone.name}</h1 >
-        <p id="release-date" class="font-montserrat my-3">${phone.releaseDate}</p>
+        <p id="release-date" class="font-montserrat mb:0 md:my-3">${phone.releaseDate}</p>
     `;
 
     if (phone.releaseDate.length == 0) {
@@ -90,9 +95,9 @@ const displayPhoneDetails = (phone) => {
 
     //displays main features including sensors
     const middleDiv = document.createElement("div");
-    middleDiv.className = "text-center flex flex-col justify-center items-start p-5";
+    middleDiv.className = "text-center flex flex-col justify-center items-start px-5";
     middleDiv.innerHTML = `
-    <h1 class="uppercase mt-3 text-xl font-bold">Main Features</h1>
+    <h1 class="uppercase mt-0 lg:mt-3 text-xl font-bold">Main Features</h1>
             <p class="mt-2 font-semibold text-left">Storage: <span class="font-normal">${phone.mainFeatures.storage}</span></p>
             <p class="my-1 font-semibold text-left">Display: <span class="font-normal">${phone.mainFeatures.displaySize}</span></p>
             <p class="my-1 font-semibold text-left">ChipSet: <span class="font-normal">${phone.mainFeatures.chipSet}</span>
@@ -104,10 +109,10 @@ const displayPhoneDetails = (phone) => {
 
     //displays others
     const rightDiv = document.createElement("div");
-    rightDiv.innerHTML = "text-center flex flex-col justify-center items-start p-5";
+    rightDiv.className = "text-center flex flex-col justify-center items-start px-5 my-5 md:my-0";
     rightDiv.innerHTML =
         `
-        <h1 class="uppercase mt-10 text-lg font-bold">Others</h1>
+        <h1 class="uppercase mt-0 lg:mt-3 text-xl font-bold">Others</h1>
         <p class="mt-2 font-semibold text-left">WLAN: <span class="font-normal">${phone.others.WLAN}</span></p>
         <p class="my-1 font-semibold text-left">Bluetooth: <span class="font-normal">${phone.others.Bluetooth}</span></p>
         <p class="my-1 font-semibold text-left">GPS: <span class="font-normal">${phone.others.GPS}</span></p>

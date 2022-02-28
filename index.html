@@ -23,8 +23,10 @@
 </head>
 
 <body>
+
+    <!-- header part -->
     <header class="mb-10">
-        <h2 class="text-5xl text-cyan-700 font-bold text-center mt-5">Phone Finder</h2>
+        <h2 class="text-2xl md:text-4xl lg:text-5xl text-cyan-700 font-bold text-center mt-7 md:mt-5">Phone Finder</h2>
     </header>
 
     <!-- search option starts here -->
@@ -32,78 +34,19 @@
         <input id="phone-name-input" placeholder="Input the phone name you want to search" type="text"
             class="border-2 w-1/2 p-2 rounded-md border-cyan-600">
         <button onclick="searchButton()" class="bg-cyan-700 text-white px-5 py-2 rounded-md ml-2">Search</button>
-        <h4 id="error-msg" class="text-xl text-cyan-700 font-semibold text-center mt-2"></h4>
+        <h4 id="error-msg" class="text-sm md:text-xl text-cyan-700 font-semibold text-center mt-2"></h4>
+        <div id="not-found-div"></div>
     </section>
 
     <!-- phone details starts here -->
-    <section id="phone-details-section" class="grid grid-cols-3 mx-28 mb-10 bg-cyan-50 gap-5">
-        <!-- <div class=" text-center flex flex-col justify-center items-center p-5">
-            <img class="w-2/6 h-3/6" src="camera.png" alt="">
-            <h1 class="uppercase mt-3 text-xl">movies director</h1>
-            <p class="font-montserrat my-3">Ex quam platea aliquet viverra si dictumst lobortis quis aliquam
-                dis
-                eget. </p>
-        </div> -->
-
-        <!-- <div class=" text-center flex flex-col justify-center items-start">
-            <h1 class="uppercase mt-3 text-xl font-bold">Main Features</h1>
-            <p class="mt-2 font-semibold text-left">Storage: <span class="font-normal">128GB/256GB/1TB storage, no card
-                    slot</span></p>
-            <p class="my-1 font-semibold text-left">Display: <span class="font-normal">6.7 inches, 109.8 cm2 (~87.4%
-                    screen-to-body ratio)</span></p>
-            <p class="my-1 font-semibold text-left">ChipSet: <span class="font-normal">Apple A15 Bionic (5 nm)</span>
-            </p>
-            <p class="my-1 font-semibold text-left">Memory: <span class="font-normal">128GB 6GB RAM, 256GB 6GB RAM,
-                    512GB 6GB RAM,
-                    1TB 6GB RAM</span></p>
-
-            <p class="my-1 font-semibold text-left">Memory: <span class="font-normal">Face ID, accelerometer, gyro,
-                    proximity, compass, barometer</span></p>
-
-        </div>
-
-        <div class=" text-center flex flex-col justify-center items-start">
-            <h1 class="uppercase mt-3 text-lg font-bold">Others</h1>
-            <p class="my-1 font-semibold text-left">WLAN: <span class="font-normal">Wi-Fi 802.11 a/b/g/n/ac/6,
-                    dual-band,
-                    hotspot</span></p>
-            <p class="my-1 font-semibold text-left">Bluetooth: <span class="font-normal">5.0, A2DP, LE</span></p>
-            <p class="my-1 font-semibold text-left">GPS: <span class="font-normal">Yes, with A-GPS, GLONASS, GALILEO,
-                    BDS,
-                    QZSS</span></p>
-            <p class="my-1 font-semibold text-left">NFC: <span class="font-normal">Yes</span></p>
-            <p class="my-1 font-semibold text-left">Radio: <span class="font-normal">No</span></p>
-            <p class="my-1 font-semibold text-left">USB: <span class="font-normal">Lightning, USB 2.0</span></p>
-
-        </div> -->
+    <section id="phone-details-section"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mx-14 md:mx-28 mb-5 md:mb-10 bg-cyan-50 md:gap-5 px-5 :px-0 rounded-lg">
     </section>
 
     <!-- phone display starts here -->
-    <section id="phone-display-section" class="grid grid-cols-3 gap-14 mx-28">
-        <!-- <div class="border-2 border-cyan-700 text-center flex flex-col justify-center items-center p-5">
-            <img class="w-2/6 h-3/6" src="camera.png" alt="">
-            <h1 class="uppercase mt-3 text-xl">movies director</h1>
-            <p class="font-montserrat my-3">Ex quam platea aliquet viverra si dictumst lobortis quis aliquam
-                dis
-                eget. </p>
-            <button class="bg-cyan-700 text-white py-2 px-3 lg:px-5 font-semibold rounded-md">Show Details</button>
-        </div> -->
-        <!-- <div class="border-2 border-cyan-700 text-center flex flex-col justify-center items-center p-5">
-            <img class="w-2/6 h-3/6" src="camera.png" alt="">
-            <h1 class="uppercase mt-3 text-xl">movies director</h1>
-            <p class="font-montserrat mt-3">Ex quam platea aliquet viverra si dictumst lobortis quis aliquam
-                dis
-                eget. </p>
-        </div>
-        <div class="border-2 border-cyan-700 text-center flex flex-col justify-center items-center p-5">
-            <img class="w-2/6 h-3/6" src="camera.png" alt="">
-            <h1 class="uppercase mt-3 text-xl">movies director</h1>
-            <p class="font-montserrat mt-3">Ex quam platea aliquet viverra si dictumst lobortis quis aliquam
-                dis
-                eget. </p>
-        </div> -->
+    <section id="phone-display-section"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-10 lg:gap-14 mx-14 md:mx-28">
     </section>
-
 
 
     <script src="js/index.js"></script>
