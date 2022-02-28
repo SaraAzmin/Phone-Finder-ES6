@@ -7,13 +7,16 @@ const searchButton = () => {
     const input = document.getElementById("phone-name-input");
     const inputValue = input.value;
 
+    const error = document.getElementById("error-msg");
+
     //error checking
     if (inputValue == '') {
-        alert("Please input phone name");
+        error.innerText = 'Input cannot be blank. Please give a valid input';
         displaySection.innerHTML = '';
     }
     else if (!isNaN(inputValue)) {
-        alert("Please give a valid input");
+        error.innerText = 'Input cannot be number. Please give a valid input';
+        displaySection.innerHTML = '';
         input.value = '';
     }
     else {
@@ -21,17 +24,24 @@ const searchButton = () => {
         fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
             .then(res => res.json())
             .then(data => displayPhones(data.data))
+
+        input.value = '';
+        error.innerText = '';
     }
 }
 
 //function for displaying the phones searched for
 const displayPhones = (phones) => {
+
+    displaySection.innerHTML = '';
+    detailsSection.innerHTML = '';
+
     //show if no results found
     if (phones.length == 0) {
         const div = document.createElement("div");
         div.innerHTML = `
         <h4 class="text-2xl text-cyan-700 font-bold text-center mt-5">Found no results for search</h4>
-        `
+        `;
         searchSection.appendChild(div);
     }
     else {
@@ -43,7 +53,7 @@ const displayPhones = (phones) => {
                 <h1 class="uppercase mt-3 text-xl">${phone.brand}</h1>
                 <p class="my-3">${phone.phone_name}</p>
                 <button onclick="showDetailsButton('${phone.slug}')" class="bg-cyan-700 text-white py-2 px-3 lg:px-5 font-semibold rounded-md">Show Details</button>
-            `
+            `;
             displaySection.appendChild(gridDiv);
         }
     }
@@ -61,6 +71,8 @@ const showDetailsButton = (phoneId) => {
 //display phone details by slug
 const displayPhoneDetails = (phone) => {
 
+    detailsSection.innerHTML = '';
+
     //displays phone image, name and releasedate
     const leftDiv = document.createElement("div");
     leftDiv.className = "text-center flex flex-col justify-center items-center p-5"
@@ -69,6 +81,7 @@ const displayPhoneDetails = (phone) => {
             <h1 class="uppercase mt-3 text-xl font-bold">${phone.name}</h1 >
         <p id="release-date" class="font-montserrat my-3">${phone.releaseDate}</p>
     `;
+
     if (phone.releaseDate.length == 0) {
         const releaseDateField = document.getElementById("release-date");
         releaseDateField.innerText = "No release date";
