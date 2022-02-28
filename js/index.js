@@ -42,10 +42,19 @@ const displayPhones = (phones) => {
             <img class=" h-2/3" src="${phone.image}" alt="">
                 <h1 class="uppercase mt-3 text-xl">${phone.brand}</h1>
                 <p class="my-3">${phone.phone_name}</p>
-                <button class="bg-cyan-700 text-white py-2 px-3 lg:px-5 font-semibold rounded-md">Show Details</button>
+                <button onclick="showDetailsButton('${phone.slug}')" class="bg-cyan-700 text-white py-2 px-3 lg:px-5 font-semibold rounded-md">Show Details</button>
             `
             displaySection.appendChild(gridDiv);
         }
     }
 
+}
+
+//onclick function for the show details button
+//loads details of the selected phone
+const showDetailsButton = (phoneId) => {
+    //console.log(phoneId);
+    fetch(`https://openapi.programming-hero.com/api/phone/${phoneId}`)
+        .then(res => res.json())
+        .then(data => console.log(data.data))
 }
