@@ -26,6 +26,7 @@ const searchButton = () => {
         input.value = '';
     }
     else {
+
         //dynamic url for searching by input
         fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
             .then(res => res.json())
@@ -59,12 +60,13 @@ const displayPhones = (phones) => {
 
     }
     else {
+
         showPhones(phones);
     }
 }
 
 
-//function for showing phones searched
+//function to be called for showing phones
 const showPhones = (phones) => {
     for (const phone of phones) {
 
