@@ -1,6 +1,8 @@
 const searchSection = document.getElementById("search-section");
+const notFoundDiv = document.getElementById("not-found-div");
 const displaySection = document.getElementById("phone-display-section");
 const detailsSection = document.getElementById("phone-details-section");
+
 
 //onclick function for the search button
 const searchButton = () => {
@@ -12,10 +14,14 @@ const searchButton = () => {
     //error checking
     if (inputValue == '') {
         error.innerText = 'Input cannot be blank. Please give a valid input';
+
+        detailsSection.innerHTML = '';
         displaySection.innerHTML = '';
     }
     else if (!isNaN(inputValue)) {
         error.innerText = 'Input cannot be number. Please give a valid input';
+
+        detailsSection.innerHTML = '';
         displaySection.innerHTML = '';
         input.value = '';
     }
@@ -30,13 +36,12 @@ const searchButton = () => {
     }
 }
 
+
 //function for displaying the phones searched for
 const displayPhones = (phones) => {
 
     displaySection.innerHTML = '';
     detailsSection.innerHTML = '';
-
-    const notFoundDiv = document.getElementById("not-found-div");
 
     //show if no results found
     if (phones.length == 0) {
@@ -46,24 +51,44 @@ const displayPhones = (phones) => {
         `;
         searchSection.appendChild(notFoundDiv);
     }
-    else {
-        for (const phone of phones) {
+    else if (phones.length > 20) {
 
-            notFoundDiv.innerHTML = '';
+        //show only first 20 results of search
+        const phoneResult20 = phones.slice(0, 20);
+        showPhones(phoneResult20);
 
-            const gridDiv = document.createElement("div");
-            gridDiv.className = "border-2 border-cyan-700 rounded-md text-center flex flex-col justify-center items-center py-3";
-            gridDiv.innerHTML = `
-            <img class="h-2/3" src="${phone.image}" alt="">
-                <h1 class="uppercase mt-3 text-xl">${phone.brand}</h1>
-                <p class="my-3">${phone.phone_name}</p>
-                <button onclick="showDetailsButton('${phone.slug}')" class="bg-cyan-700 text-white py-2 px-3 lg:px-5 font-semibold rounded-md">Show Details</button>
-            `;
-            displaySection.appendChild(gridDiv);
-        }
+        const showAllButtonDiv = document.createElement("div");
+        showAllButtonDiv.className = "flex justify-center items-center lg:col-span-1 md:col-span-2";
+        showAllButtonDiv.innerHTML = `
+        <button class="bg-cyan-700 text-white px-5 py-2 rounded-md ml-2 w-auto">Show All</button> 
+        `;
+        displaySection.appendChild(showAllButtonDiv);
+
     }
-
+    else {
+        showPhones(phones);
+    }
 }
+
+
+//function for showing phones searched
+const showPhones = (phones) => {
+    for (const phone of phones) {
+
+        notFoundDiv.innerHTML = '';
+
+        const gridDiv = document.createElement("div");
+        gridDiv.className = "border-2 border-cyan-700 rounded-md text-center flex flex-col justify-center items-center py-3";
+        gridDiv.innerHTML = `
+        <img class="h-2/3" src="${phone.image}" alt="">
+            <h1 class="uppercase mt-3 text-xl">${phone.brand}</h1>
+            <p class="my-3">${phone.phone_name}</p>
+            <button onclick="showDetailsButton('${phone.slug}')" class="bg-cyan-700 text-white py-2 px-3 lg:px-5 font-semibold rounded-md">Show Details</button>
+        `;
+        displaySection.appendChild(gridDiv);
+    }
+}
+
 
 //onclick function for the show details button
 //loads details of the selected phone
@@ -73,9 +98,10 @@ const showDetailsButton = (phoneId) => {
         .then(data => displayPhoneDetails(data.data))
 }
 
+
 //display phone details by slug
 const displayPhoneDetails = (phone) => {
-    console.log(phone)
+
     detailsSection.innerHTML = '';
 
     //displays phone image, name and releasedate
@@ -113,13 +139,13 @@ const displayPhoneDetails = (phone) => {
     rightDiv.innerHTML =
         `
         <h1 class="uppercase mt-0 lg:mt-3 text-xl font-bold">Others</h1>
-        <p class="mt-2 font-semibold text-left">WLAN: <span class="font-normal">${phone.others.WLAN}</span></p>
-        <p class="my-1 font-semibold text-left">Bluetooth: <span class="font-normal">${phone.others.Bluetooth}</span></p>
-        <p class="my-1 font-semibold text-left">GPS: <span class="font-normal">${phone.others.GPS}</span></p>
-        <p class="my-1 font-semibold text-left">NFC: <span class="font-normal">${phone.others.NFC}</span></p>
-        <p class="my-1 font-semibold text-left">Radio: <span class="font-normal">${phone.others.Radio}</span></p>
-        <p class="my-1 font-semibold text-left">USB: <span class="font-normal">${phone.others.USB}</span></p>
-    `;
+        <p class="mt-2 font-semibold text-left">WLAN: <span class="font-normal">${phone?.others.WLAN}</span></p >
+        <p class="my-1 font-semibold text-left">Bluetooth: <span class="font-normal">${phone?.others?.Bluetooth}</span></p>
+        <p class="my-1 font-semibold text-left">GPS: <span class="font-normal">${phone?.others.GPS}</span></p>
+        <p class="my-1 font-semibold text-left">NFC: <span class="font-normal">${phone?.others.NFC}</span></p>
+        <p class="my-1 font-semibold text-left">Radio: <span class="font-normal">${phone?.others.Radio}</span></p>
+        <p class="my-1 font-semibold text-left">USB: <span class="font-normal">${phone?.others.USB}</span></p>
+`;
     detailsSection.appendChild(rightDiv);
 
 }
