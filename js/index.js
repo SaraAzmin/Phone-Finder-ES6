@@ -57,13 +57,6 @@ const displayPhones = (phones) => {
         const phoneResult20 = phones.slice(0, 20);
         showPhones(phoneResult20);
 
-        const showAllButtonDiv = document.createElement("div");
-        showAllButtonDiv.className = "flex justify-center items-center lg:col-span-1 md:col-span-2";
-        showAllButtonDiv.innerHTML = `
-        <button class="bg-cyan-700 text-white px-5 py-2 rounded-md ml-2 w-auto">Show All</button> 
-        `;
-        displaySection.appendChild(showAllButtonDiv);
-
     }
     else {
         showPhones(phones);
